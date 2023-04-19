@@ -1,5 +1,0 @@
-set SECRET_KEY=uwu
-set MONGO_CONNECTION_STRING=mongodb+srv://user1:yz8rnufAPOZR8LYg@forumproject.b1y8joc.mongodb.net/?retryWrites=true
-set MONGO_DBNAME=FormPostDB
-set GITHUB_CLIENT_ID=72dc0adbe338a4d805a2
-set GITHUB_CLIENT_SECRET=81cd8d32487fada18a74ab9980c5679e6f1f588e
