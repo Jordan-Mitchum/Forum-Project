@@ -3,9 +3,12 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <h1>Home: Food Fourm</h1>
+  <h1>Home: Food Forum</h1>
 
-
-
-
+  <form action="/post" method='POST'>
+  Name of your Favorite Food<br>
+  <input type="text" name="Subject" id="1">
+  <br>
+    </form>
+    {{ message }}
 {% endblock %}
