@@ -1,7 +1,39 @@
+/* Light mode */
 body {
-
+  background-color: #ffffff;
+  color: #000000;
 }
 
+/* Dark mode */
+body.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
 #content {
      margin-left: 20px;
+}
+	
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0800ff;
+}
+
+.button2:hover {
+  background-color: #007bff;
+  color: white;
 }
