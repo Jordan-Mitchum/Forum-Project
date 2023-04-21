@@ -9,6 +9,8 @@ import os
 import pymongo
 import sys
 from bson.objectid import ObjectId
+
+from datetime import date
 # This code originally from https://github.com/lepture/flask-oauthlib/blob/master/example/github.py
 # Edited by P. Conrad for SPIS 2016 to add getting Client Id and Secret from
 # environment variables, so that this will work on Heroku.
@@ -55,16 +57,17 @@ def home():
     
 @app.route('/post', methods=["GET","POST"])
 def post():
-        if 'user_data' in session:
-            newpost= {'Username':session['user_data']['login'],
-            'Subject':request.form['Subject'],
-            'Body':request.form['Body']
-            }
-            collection.insert_one(newpost)
-            print(newpost)
-            return render_template('home.html')
-        else:
-            return render_template('home.html')
+    if 'user_data' in session:
+        newpost= {'Username':session['user_data']['login'],
+        'Subject':request.form['Subject'],
+        'Date':str(date.today()),
+        'Body':request.form['Body']
+        }
+        collection.insert_one(newpost)
+        print(newpost)
+        return render_template('home.html')
+    else:
+        return render_template('home.html')
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():   
