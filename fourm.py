@@ -6,10 +6,18 @@ from flask import render_template
 import pprint
 import os
 
+import pymongo
+import sys
+from bson.objectid import ObjectId
 # This code originally from https://github.com/lepture/flask-oauthlib/blob/master/example/github.py
 # Edited by P. Conrad for SPIS 2016 to add getting Client Id and Secret from
 # environment variables, so that this will work on Heroku.
 # Edited by S. Adams for Designing Software for the Web to add comments and remove flash messaging
+connection_string = os.environ["MONGO_CONNECTION_STRING"]
+db_name = os.environ["MONGO_DBNAME"]
+client = pymongo.MongoClient(connection_string)
+db = client[db_name]
+collection = db['Posts']
 
 app = Flask(__name__)
 
@@ -47,11 +55,16 @@ def home():
     
 @app.route('/post', methods=["GET","POST"])
 def post():
-    {'Username':session['user_data']['login'],
-    'Subject':request.form['Subject']
-    }
-    print(request.form)
-    return render_template('home.html')
+        if 'user_data' in session:
+            newpost= {'Username':session['user_data']['login'],
+            'Subject':request.form['Subject'],
+            'Body':request.form['Body']
+            }
+            collection.insert_one(newpost)
+            print(newpost)
+            return render_template('home.html')
+        else:
+            return render_template('home.html')
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():   
@@ -90,4 +103,4 @@ def get_github_oauth_token():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
