@@ -12,9 +12,6 @@ body.dark-mode {
 #content {
      margin-left: 20px;
 }
-<<<<<<< HEAD
-
-=======
 	
 .button {
   background-color: #4CAF50;
@@ -41,6 +38,18 @@ body.dark-mode {
   color: white;
 }
 
+
+.user {
+    padding-top: 15px;
+    padding-left: px;
+}
+
+.post{
+    padding-bottom: 25px; 
+    padding-left: 20px;
+    border: 1px solid #4CAF50;
+}
+
 input[type=button], input[type=submit], input[type=reset] {
   background-color: #04AA6D;
   border: none;
@@ -49,7 +58,4 @@ input[type=button], input[type=submit], input[type=reset] {
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
-  
->>>>>>> 465f112b22f19484bf93ed5dca36adc768c90315
-
-
+}

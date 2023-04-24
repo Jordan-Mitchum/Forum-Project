@@ -4,6 +4,7 @@
 
 {% block content %}
   <h1>Home: Food Forum</h1>
+  <h4>Please Login Before typing :0</h4>
 
   <form action="/post" method='POST'>
     Name of your Favorite Food<br>
@@ -15,6 +16,5 @@
     <input type="submit">
   </form>
   <br>
-  
-  {{ message }}
+  {{ post }}
 {% endblock %}
