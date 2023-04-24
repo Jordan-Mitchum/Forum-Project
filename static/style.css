@@ -40,4 +40,16 @@ body.dark-mode {
   background-color: #007bff;
   color: white;
 }
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  
 >>>>>>> 465f112b22f19484bf93ed5dca36adc768c90315
+
+

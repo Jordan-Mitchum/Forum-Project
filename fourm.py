@@ -44,6 +44,8 @@ github = oauth.remote_app(
 )
 
 
+
+
 #context processors run before templates are rendered and add variable(s) to the template's context
 #context processors must return a dictionary 
 #this context processor adds the variable logged_in to the conext for all templates
