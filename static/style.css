@@ -38,6 +38,7 @@ body.dark-mode {
   color: white;
 }
 
+<<<<<<< HEAD
 .user {
     padding-top: 15px;
     padding-left: px;
@@ -48,3 +49,15 @@ body.dark-mode {
     padding-left: 20px;
     border: 1px solid #4CAF50;
 }
+=======
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+
+>>>>>>> 465f112b22f19484bf93ed5dca36adc768c90315
+>>>>>>> e7ef7a7e66c6c9d4ed2ee9cd2dfc2e32fcb07aa7
