@@ -12,9 +12,6 @@ body.dark-mode {
 #content {
      margin-left: 20px;
 }
-<<<<<<< HEAD
-
-=======
 	
 .button {
   background-color: #4CAF50;
@@ -40,4 +37,14 @@ body.dark-mode {
   background-color: #007bff;
   color: white;
 }
->>>>>>> 465f112b22f19484bf93ed5dca36adc768c90315
+
+.user {
+    padding-top: 15px;
+    padding-left: px;
+}
+
+.post{
+    padding-bottom: 25px; 
+    padding-left: 20px;
+    border: 1px solid #4CAF50;
+}

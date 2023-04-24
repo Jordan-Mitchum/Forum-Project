@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session, request, jsonify
+from flask import Flask, redirect, url_for, session, request, jsonify,  Markup
 from flask_oauthlib.client import OAuth
 #from flask_oauthlib.contrib.apps import github #import to make requests to GitHub's OAuth
 from flask import render_template
@@ -53,7 +53,13 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', post=chat())
+    
+def chat():    
+    posts=""
+    for doc in collection.find():
+        posts = posts + Markup('<div class="post"> <p class="user">' + "User:" + doc["Username"] + '</p> <p>' + doc['Date'] + '</p> <h4>' + doc['Subject'] + '</h4>' + '<p>'+ doc['Body'] + '</p></div>') 
+    return posts
     
 @app.route('/post', methods=["GET","POST"])
 def post():
@@ -64,8 +70,7 @@ def post():
         'Body':request.form['Body']
         }
         collection.insert_one(newpost)
-        print(newpost)
-        return render_template('home.html')
+        return render_template('home.html', post=chat())
     else:
         return render_template('home.html')
 #redirect to GitHub's OAuth page and confirm callback URL
