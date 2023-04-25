@@ -3,12 +3,14 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
     <!-- Dark mode button -->
   <button class="button2" onclick="toggleDarkMode()">Light mode</button>
   <br><br>
   <h1>Home: Food Forum</h1>
   <h4>Please Login Before typing :0</h4>
-
+  <h1>Food Forum</h1>
+{% if logged_in %}
   <form action="/post" method='POST'>
     Name of your Favorite Food<br>
     <input type="text" name="Subject" id="1">
@@ -19,5 +21,6 @@
     <input type="submit">
   </form>
   <br>
+{% endif %}
   {{ post }}
 {% endblock %}
