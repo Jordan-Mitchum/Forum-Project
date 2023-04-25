@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, session, request, jsonify,  Markup
 from flask_oauthlib.client import OAuth
 #from flask_oauthlib.contrib.apps import github #import to make requests to GitHub's OAuth
 from flask import render_template
+from flask import flash
 
 import pprint
 import os
@@ -23,7 +24,7 @@ collection = db['Posts']
 
 app = Flask(__name__)
 
-app.debug = False #Change this to False for production
+app.debug = True #Change this to False for production
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #Remove once done debugging
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
@@ -60,7 +61,8 @@ def home():
 def chat():    
     posts=""
     for doc in collection.find():
-        posts = posts + Markup('<div class="post"> <p class="user">' + "User:" + doc["Username"] + '</p> <p>' + doc['Date'] + '</p> <h4>' + doc['Subject'] + '</h4>' + '<p>'+ doc['Body'] + '</p></div>') 
+        posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
+        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</tr> </td>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> </table> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
@@ -74,8 +76,9 @@ def post():
         collection.insert_one(newpost)
         return render_template('home.html', post=chat())
     else:
-        return render_template('home.html')
+        return render_template('home.html', post=chat())
 #redirect to GitHub's OAuth page and confirm callback URL
+
 @app.route('/login')
 def login():   
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='http')) #callback URL must match the pre-configured callback URL
@@ -83,26 +86,27 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return render_template('message.html', message='You were logged out')
+    flash('You were logged out.')
+    return redirect('/')
 
 @app.route('/login/authorized')
 def authorized():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
-        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
+        flash('Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args), 'error')      
     else:
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
             #pprint.pprint(vars(github['/email']))
             #pprint.pprint(vars(github['api/2/accounts/profile/']))
-            message='You were successfully logged in as ' + session['user_data']['login'] + '.'
+            flash('You were successfully logged in as ' + session['user_data']['login'] + '.')
         except Exception as inst:
             session.clear()
             print(inst)
-            message='Unable to login, please try again.  '
-    return render_template('message.html', message=message)
+            flash('Unable to login, please try again.', 'error')
+    return redirect('/')
 
 
 
@@ -113,4 +117,4 @@ def get_github_oauth_token():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
