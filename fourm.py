@@ -111,6 +111,13 @@ def authorized():
 def get_github_oauth_token():
     return session['github_token']
 
+"""
+#like button
+@app.route('/post/<post_id>')
+def post(post_id):
+    post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+    return render_template('home.html', post=post)
+"""
 
 if __name__ == '__main__':
     app.run(debug=True)
