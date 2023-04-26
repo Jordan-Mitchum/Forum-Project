@@ -52,6 +52,7 @@ body.dark-mode {
     padding-bottom: 25px; 
     padding-left: 5px;
     border: 1px solid #4CAF50;
+	
 }
 
 .subject{
@@ -67,3 +68,17 @@ input[type=button], input[type=submit], input[type=reset] {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.hide{
+	display: none;
+}
+
+
+.post:hover .comment-btn {
+    display: block;
+}
+
+.post:hover .comment-form {
+    display: block;
+}
+
