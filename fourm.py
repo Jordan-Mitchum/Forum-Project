@@ -56,13 +56,13 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    return render_template('home.html', post=chat())
+        return render_template('home.html', post=chat())
     
-def chat():    
+def chat(): 
     posts=""
     for doc in collection.find():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
-        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</tr> </td>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> </table> </div>') 
+        "<tr>" '<th class="user">' + "User: " + doc["Username"] + '</th> </tr> <tr> <td class="date">' + 'Date: ' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</tr> </td>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> </table> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
