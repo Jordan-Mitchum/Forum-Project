@@ -62,7 +62,7 @@ def chat():
     posts=""
     for doc in collection.find():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
-        "<tr>" '<th class="user">' + "User: " + doc["Username"] + '</th> </tr> <tr> <td class="date">' + 'Date: ' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</tr> </td>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> </table> </div>') 
+        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button id="comBox" onclick="showCommentForm()">Comment</button>  <div id="inter" style="display: none;">	<form action="/com" id="comment">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea>	<input type="submit"></form></td></tr> </table> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
@@ -115,13 +115,7 @@ def authorized():
 def get_github_oauth_token():
     return session['github_token']
 
-"""
-#like button
-@app.route('/post/<post_id>')
-def post(post_id):
-    post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
-    return render_template('home.html', post=post)
-"""
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
