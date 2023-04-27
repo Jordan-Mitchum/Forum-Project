@@ -4,10 +4,10 @@ function toggleDarkMode() {
 }
 
 function showCommentForm() {
-  var x = document.getElementById("inter");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+  
 }
+$(document).ready(function() {
+    $(".comBox").click(function() {
+      $(this).siblings(".inter").toggle();
+    });
+  });
