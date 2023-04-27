@@ -12,6 +12,10 @@ body.dark-mode {
 #content {
      margin-left: 20px;
 }
+
+#1{
+   width: 100px;
+}
 	
 .button {
   background-color: #4CAF50;
