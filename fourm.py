@@ -66,7 +66,7 @@ def chat():
     posts=""
     for doc in collection.find():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
-        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + "Date:" + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button id="comBox" onclick="showCommentForm()">Comment</button>  <div id="inter" style="display: none;">	<form action="/com" id="comment">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea>	<input type="submit"></form></td></tr> </table> </div>') 
+        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button class="comBox" onclick="showCommentForm()">Comment</button>  <div class="inter" style="display: none;">	<form action="/com" id="comment">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea>	<input type="submit"></form></div></td></tr> </table> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
@@ -119,6 +119,10 @@ def authorized():
 def get_github_oauth_token():
     return session['github_token']
 
+@app.route('/comm', methods=["GET","POST"])
+def comment():
+    collection.insert_one(idea)
+    return render_template('home.html', post=comment())
 
 
 if __name__ == '__main__':
