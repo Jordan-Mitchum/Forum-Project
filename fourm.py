@@ -56,9 +56,9 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    return render_template('home.html', post=chat())
+        return render_template('home.html', post=chat())
     
-def chat():    
+def chat(): 
     posts=""
     for doc in collection.find():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
