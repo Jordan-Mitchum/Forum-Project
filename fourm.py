@@ -66,7 +66,7 @@ def chat():
     posts=""
     for doc in collection.find():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
-        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr><td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button class="comBox" onclick="showCommentForm()">Comment</button>  <div class="inter" style="display: none;">	<form action="/com" id="comment">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea>	<input type="submit"></form></div></td></tr> </table></div>') 
+        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr><td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button class="comBox" onclick="showCommentForm()">Comment</button>  <div class="inter" style="display: none;">	<form action="/com" id="comment">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea>	<input type="submit"></form></div></td></tr> </table> <form class="likeBtn" action="/like" method ="POST">Like(<input type="submit" class="totalLikes" value= "Likes" <input type = "hidden" name="Likes" value="'+ str(doc['_id']) + '">0</input>)</form> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
@@ -123,7 +123,14 @@ def get_github_oauth_token():
 def comment():
     collection.insert_one(idea)
     return render_template('home.html', post=comment())
-
+    
+@app.route('/like', methods=["GET", "POST"])
+def like():
+    filter = {'_id':'19'}
+    #odjectid
+   # increase
+   
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

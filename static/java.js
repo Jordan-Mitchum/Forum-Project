@@ -12,3 +12,18 @@ $(document).ready(function() {
     });
   });
   
+  
+let likes = 0;
+$(document).ready(function () {
+   likes = 0;
+   setLikes(likes);
+});
+      
+$("body").on("click", ".likeBtn", function () {
+   likes++;
+   setLikes(likes);
+});
+
+function setLikes(count) {
+   $(this).children(".totalLikes").text(count);
+}
