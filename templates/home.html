@@ -8,6 +8,7 @@
   <button class="button2" onclick="toggleDarkMode()">Light mode</button>
   <br><br>
   <h1>Food Forum</h1>
+  <h3> Please Login</h3>
 {% if logged_in %}
   <form action="/post" method='POST'>
     Name of your Favorite Food or Drink<br>
@@ -18,12 +19,10 @@
     <br>
     <input type="submit">
   </form>
-
-
-
-{% endif %}
   {{ post }}
   <div>
     <p>{{['Comment'] }}</p>
 </div>
+
+{% endif %}
 {% endblock %}
