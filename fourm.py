@@ -68,7 +68,7 @@ def chat():
         posts = posts + Markup('<div class="post">' "<table style='width:100%'>"
 
 
-        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button class="comBox" onclick="showCommentForm()">Comment</button>  <div class="inter" style="display: none;">	<form action="/com" id="'+str(doc["_id"])+'" method="POST">	<textarea rows="4" cols="50" name="comment" form="comment"></textarea><input type="hidden" name="Comment" value="'+str(doc["_id"])+'"></input>	<input type="submit"></form> <form class="likeBtn" action="/like" method ="POST">Like(<input type="submit" class="totalLikes" value= "Likes" <input type = "hidden" name="Likes" value="'+ str(doc['_id']) + '">0</input>)</form></div></td></tr> </table> </div>') 
+        "<tr>" '<th class="user">' + "User:" + doc["Username"] + '</th> </tr> <tr> <td class="date">' + doc['Date'] + '</td> </tr> <tr> <td class="subject">' + doc['Subject'] + '</td> </tr>' + '<tr> <td>'+ doc['Body'] + '</td> </tr> <tr><td>  <button class="comBox" onclick="showCommentForm()">Comment</button>  <div class="inter" style="display: none;">	<form action="/com" id="'+str(doc["_id"])+'" method="POST">	<textarea rows="4" cols="50" name="newc" form="comment"></textarea><input type="hidden" name="Comment" value="'+str(doc["_id"])+'"></input>	<input type="submit"></form> <form class="likeBtn" action="/like" method ="POST">Like(<input type="submit" class="totalLikes" value= "Likes" <input type = "hidden" name="Likes" value="'+ str(doc['_id']) + '">0</input>)</form></div></td></tr> </table> </div>') 
     return posts
     
 @app.route('/post', methods=["GET","POST"])
@@ -124,17 +124,15 @@ def get_github_oauth_token():
 @app.route('/com', methods=["GET", "POST"])
 def comment():
 
-    collection.insert_one(idea)
-    return render_template('home.html', post=comment())
-    
-
-
-
     if request.method == "POST":
-        myquery = { "_id":ObjectId(request.form["Comment"]) }
-        newvalues = { "$set": { "address": "Canyon 123" } }
+        comment_id = request.form.get("Comment")
+        if ObjectId.is_valid(comment_id):
+            myquery = { "_id": ObjectId(comment_id) }
+            print(request.form)
+            newvalues = { "$set": { "Comments":request.form.get("newc")} }
+            collection.update_one(myquery, newvalues)
+            
     return redirect('/')
-
 
 @app.route('/like', methods=["GET", "POST"])
 def like():
